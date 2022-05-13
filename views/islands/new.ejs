@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>New Island</title>
-</head>
-<body>
-  <form action="/islands" method="POST">
+<% layout('./layouts/boilerplate') %> 
+  <!-- <form action="/islands" method="POST">
     <div>
       <label for="title">Title</label>
       <input type="text" id="title" name="island[title]">
@@ -18,7 +10,42 @@
     </div>
     <button>Add Island</button>
   </form>
-  <a href="/islands">Back to all islands</a>
+  <a href="/islands">Back to all islands</a> -->
   
-</body>
-</html>
+  <div class="row">
+    <h1 class="text-center mt-3">Add Island</h1>
+    <div class="col-6 offset-3">
+      <form action="/islands" method="POST" novalidate class="validated-form">
+        <div class="mb-3">
+          <label for="title" class="form-label">Title</label>
+          <input class="form-control" type="text" id="title" name="island[title]" required>
+        </div>
+        <div class="mb-3">
+          <label for="location" class="form-label">Location</label>
+          <input class="form-control" type="text" id="location" name="island[location]" required>
+        </div>
+        <div class="mb-3">
+          <label for="image" class="form-label">Image URL</label>
+          <input class="form-control" type="text" id="image" name="island[image]" required>
+        </div>
+        <div class="mb-3">
+          <label for="price" class="form-label">Island Price</label>
+          <div class="input-group">
+            <span class="input-group-text" id="price-label">$</span>
+            <input type="text" id="price" class="form-control" placeholder="0.00" aria-label="price"
+              aria-describedby="price-label" name="island[price]" required>
+          </div>
+      </div>
+        
+  
+        <div class="mb-3">
+          <label for="description" class="form-label">Description</label>
+          <textarea class="form-control" type="text" id="description" name="island[description]" required></textarea>
+        </div>
+        <div class="mb-3">
+          <button class="btn btn-info">Add Island</button>
+        </div>
+      
+      </form>
+
+      <a href="/islands">Back to all Islands</a>

@@ -18,7 +18,9 @@
   "homepage": "https://github.com/PlanetNamekTech/Island_Lyfe_v2#readme",
   "dependencies": {
     "ejs": "^3.1.7",
+    "ejs-mate": "^4.0.0",
     "express": "^4.18.1",
+    "joi": "^17.6.0",
     "method-override": "^3.0.0",
     "mongoose": "^6.3.3"
   }
