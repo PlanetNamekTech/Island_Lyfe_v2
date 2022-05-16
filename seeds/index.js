@@ -17,9 +17,14 @@ const seedDB = async() => {
   await Island.deleteMany({});
   for(let i = 0; i < 50; i++){
     const rand1000 = Math.floor(Math.random()*1000);
+    const rand2 = Math.floor(Math.random()*2);
+    const hemis = ['Northern', 'Southern'];
     const island = new Island ({
       location: `${islands[rand1000].city}, ${islands[rand1000].state}`,
-      title: `${sample(descriptors)} ${sample(places)}`
+      title: `${sample(descriptors)} ${sample(places)}`,
+      image: 'https://source.unsplash.com/random/300x300/?beach',
+      description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusantium ab labore aliquam iste, dolorum culpa fugiat similique laborum repudiandae dolore?',
+      hemisphere: `${hemis[rand2]}`
     })
     await island.save();
   }

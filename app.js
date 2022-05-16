@@ -2,11 +2,12 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
-const { islandSchema } = require('./schemas.js')
+const { islandSchema, reviewSchema } = require('./schemas.js')
 const catchAsync = require('./Utils/catchAsync');
 const ExpError = require('./Utils/ExpError');
 const mtdOverride = require('method-override');
 const Island = require('./models/island');
+const Review = require('./models/review');
 
 mongoose.connect('mongodb://localhost:27017/island-lyfe')
 
@@ -34,6 +35,16 @@ const validateIsland = (req,res,next) => {
   }
 }
 
+const validateReview = (req,res,next) => {
+  const { error } = reviewSchema.validate(req.body);
+  if(error) {
+    let msg = error.details.map(element => element.message).join(',')
+    throw new ExpError(msg, 400)
+  } else {
+    next();
+  }
+}
+
 app.get('/', (req, res) => {
   res.render('home')
 });
@@ -54,7 +65,7 @@ app.post('/islands', validateIsland, catchAsync(async(req,res) => {
 }))
 
 app.get('/islands/:id' , catchAsync(async(req,res) => {
-  const island = await Island.findById(req.params.id);
+  const island = await Island.findById(req.params.id).populate('reviews');
   res.render('islands/show', { island });
 }))
 
@@ -73,6 +84,22 @@ app.delete('/islands/:id', catchAsync(async(req, res) => {
   const { id } = req.params;
   await Island.findByIdAndDelete(id);
   res.redirect('/islands');
+}))
+
+app.post('/islands/:id/reviews', validateReview, catchAsync(async(req,res) => {
+  const island = await Island.findById(req.params.id);
+  const review = new Review(req.body.review);
+  island.reviews.push(review);
+  await review.save();
+  await island.save();
+  res.redirect(`/islands/${island._id}`);
+}))
+
+app.delete('/islands/:id/reviews/:reviewId', catchAsync(async(req,res) => {
+  const { id, reviewId } = req.params;
+  await Island.findByIdAndUpdate(id, {$pull: {reviews: reviewId}});
+  await Review.findByIdAndDelete(reviewId);
+  res.redirect(`/islands/${id}`);
 }))
 
 app.all('*', (req,res,next) => {

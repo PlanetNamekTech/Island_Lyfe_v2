@@ -1,12 +1,57 @@
 <% layout('./layouts/boilerplate') %> 
-  <h1><%=island.title %> </h1>
-  <h2><%=island.location %> </h2>
-  <p><a href="/islands/<%=island._id%>/edit">Edit Island</a></p>
-  <p>
-    <form action="/islands/<%= island._id%>?_method=DELETE" method="POST">
-      <button>Delete Island</button>
+
+
+  <div class="row">
+    <div class="col-6">
+      <div class="card mb-3">
+        <img src="<%= island.image %>" class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title"><%= island.title %></h5>
+          <p class="card-text"><%= island.description %></p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item text-muted"><%= island.location %></li>
+          <li class="list-group-item">Hemisphere: <%= island.hemisphere %></li>
+        </ul>
+        <div class="card-body">
+          <a class="card-link btn btn-info" href="/islands/<%=island._id%>/edit">Edit</a>
+          <form class="d-inline" action="/islands/<%= island._id  %>?_method=DELETE" method="POST">
+            <button class="btn btn-danger">Delete Campground</button>
+          </form>
+        </div>
+        <div class="card-footer text-muted">2 Days Ago</div>
+      </div>
+    
+    </div>
+
+  <div class="col-6">
+    <h2>Leave a Review</h2>
+    <form action="/islands/<%= island._id %>/reviews" method="POST" class="mb-3 validated-form" novalidate>
+      <div class="mb-3">
+        <label class="form-label" for="rating">Rating</label>
+        <input class="form-range" type="range" min="1" max="5" name="review[rating]" id="">
+      </div>
+      <div class="mb-3">
+        <label clas="form-label" for="body">Review</label>
+        <textarea class="form-control" name="review[body]" id="" cols="30" rows="3" required></textarea>
+      <div class="valid-feedback">
+        Looks Good
+      </div>
+      </div>
+      <button class="btn btn-success">Submit Review</button>
     </form>
-  </p>
+    <%  for (let review of island.reviews) { %>  
+      <div class="mb-3 card">   
+        <div class="card-body">
+          <h5 class="card-title">Rating: <%= review.rating %> </h5>
+          <p class="card-text">Review: <%= review.body %> </p>
+          <form action="/islands/<%= island._id %>/reviews/<%= review._id%>?_method=DELETE" method="POST">
+          <button class="btn btn-sm btn-danger">Delete Review</button>
+          </form>
+        </div>
+      </div>
+    <% } %>
+  </div>
 
   <footer>
     <a href="/islands">All Islands</a>
