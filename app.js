@@ -2,12 +2,14 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
-const { islandSchema, reviewSchema } = require('./schemas.js')
-const catchAsync = require('./Utils/catchAsync');
+const session = require('express-session');
+const flash = require('connect-flash');
 const ExpError = require('./Utils/ExpError');
 const mtdOverride = require('method-override');
-const Island = require('./models/island');
-const Review = require('./models/review');
+
+
+const islands = require('./routes/islands');
+const reviews = require('./routes/reviews');
 
 mongoose.connect('mongodb://localhost:27017/island-lyfe')
 
@@ -24,83 +26,30 @@ app.set('views', path.join(__dirname, 'views'))
 
 app.use(express.urlencoded({extended: true}))
 app.use(mtdOverride('_method'))
+app.use(express.static(path.join(__dirname, 'public')))
 
-const validateIsland = (req,res,next) => {
-  const { error } = islandSchema.validate(req.body);
-  if(error) {
-    const msg = error.details.map(el => el.message).join(',')
-    throw new ExpError(msg, 400)
-  } else {
-    next();
+const sessionConfig = {
+  secret: 'islandparadise',
+  resave: false,
+  saveUninitialized: true,
+  cookie: {
+    httpOnly: true,
+    expires: Date.now() + 1000*60*60*24*7, // A week from today, Date.now() initially in ms
+    maxAge: 1000*60*60*24*7 // Takes precedence in most browsers
   }
-}
+};
 
-const validateReview = (req,res,next) => {
-  const { error } = reviewSchema.validate(req.body);
-  if(error) {
-    let msg = error.details.map(element => element.message).join(',')
-    throw new ExpError(msg, 400)
-  } else {
-    next();
-  }
-}
+app.use(session(sessionConfig))
+app.use(flash())
 
-app.get('/', (req, res) => {
-  res.render('home')
-});
-
-app.get('/islands', catchAsync(async(req, res) => {
-  const islands = await Island.find({});
-  res.render('islands/index', { islands });
-}))
-
-app.get('/islands/new', (req, res) => {
-  res.render('islands/new')
+app.use((req,res,next) => {
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+  next();
 })
 
-app.post('/islands', validateIsland, catchAsync(async(req,res) => {
-  const island = new Island(req.body.island);
-  await island.save();
-  res.redirect(`/islands/${island._id}`)
-}))
-
-app.get('/islands/:id' , catchAsync(async(req,res) => {
-  const island = await Island.findById(req.params.id).populate('reviews');
-  res.render('islands/show', { island });
-}))
-
-app.get('/islands/:id/edit', catchAsync(async(req,res) => {
-  const island = await Island.findById(req.params.id);
-  res.render('islands/edit', { island });
-}))
-
-app.put('/islands/:id', validateIsland, catchAsync(async(req, res) => {
-  const { id } = req.params;
-  const island = await Island.findByIdAndUpdate(id, {...req.body.island});
-  res.redirect(`/islands/${island._id}`);
-}))
-
-app.delete('/islands/:id', catchAsync(async(req, res) => {
-  const { id } = req.params;
-  await Island.findByIdAndDelete(id);
-  res.redirect('/islands');
-}))
-
-app.post('/islands/:id/reviews', validateReview, catchAsync(async(req,res) => {
-  const island = await Island.findById(req.params.id);
-  const review = new Review(req.body.review);
-  island.reviews.push(review);
-  await review.save();
-  await island.save();
-  res.redirect(`/islands/${island._id}`);
-}))
-
-app.delete('/islands/:id/reviews/:reviewId', catchAsync(async(req,res) => {
-  const { id, reviewId } = req.params;
-  await Island.findByIdAndUpdate(id, {$pull: {reviews: reviewId}});
-  await Review.findByIdAndDelete(reviewId);
-  res.redirect(`/islands/${id}`);
-}))
+app.use('/islands', islands);
+app.use('/islands/:id/reviews', reviews)
 
 app.all('*', (req,res,next) => {
   next(new ExpError("Page not Found", 404))
