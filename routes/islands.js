@@ -4,6 +4,7 @@ const { islandSchema } = require('../schemas');
 const catchAsync = require('../Utils/catchAsync');
 const ExpError = require('../Utils/ExpError');
 const Island = require('../models/island');
+const { isLoggedIn } = require('../middleware');
 
 const validateIsland = (req,res,next) => {
   const {error} = islandSchema.validate(req.body);
@@ -24,11 +25,11 @@ router.get('/', catchAsync(async(req, res) => {
   res.render('islands/index', { islands });
 }))
 
-router.get('/new', (req, res) => {
+router.get('/new', isLoggedIn, (req, res) => {
   res.render('islands/new')
 })
 
-router.post('/', validateIsland, catchAsync(async(req,res) => {
+router.post('/', isLoggedIn, validateIsland, catchAsync(async(req,res) => {
   const island = new Island(req.body.island);
   await island.save();
   req.flash('success', 'Successfully added island!');
@@ -44,7 +45,7 @@ router.get('/:id' , catchAsync(async(req,res) => {
   res.render('islands/show', { island });
 }))
 
-router.get('/:id/edit', catchAsync(async(req,res) => {
+router.get('/:id/edit', isLoggedIn, catchAsync(async(req,res) => {
   const island = await Island.findById(req.params.id);
   if(!island){
     req.flash('error', 'Cannot locate desired island');
@@ -53,14 +54,14 @@ router.get('/:id/edit', catchAsync(async(req,res) => {
   res.render('islands/edit', { island });
 }))
 
-router.put('/:id', validateIsland, catchAsync(async(req, res) => {
+router.put('/:id', isLoggedIn, validateIsland, catchAsync(async(req, res) => {
   const { id } = req.params;
   const island = await Island.findByIdAndUpdate(id, {...req.body.island});
   req.flash('success', 'Successfully updated island!');
   res.redirect(`/islands/${island._id}`);
 }))
 
-router.delete('/:id', catchAsync(async(req, res) => {
+router.delete('/:id', isLoggedIn, catchAsync(async(req, res) => {
   const { id } = req.params;
   await Island.findByIdAndDelete(id);
   req.flash('success', 'Island successfully deleted');

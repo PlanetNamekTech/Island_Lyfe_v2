@@ -4,12 +4,16 @@ const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
 const session = require('express-session');
 const flash = require('connect-flash');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
 const ExpError = require('./Utils/ExpError');
 const mtdOverride = require('method-override');
+const User = require('./models/user');
 
 
 const islands = require('./routes/islands');
 const reviews = require('./routes/reviews');
+const users = require('./routes/users');
 
 mongoose.connect('mongodb://localhost:27017/island-lyfe')
 
@@ -42,12 +46,21 @@ const sessionConfig = {
 app.use(session(sessionConfig))
 app.use(flash())
 
+// Must come after session
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate())); // Static method from passport
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
 app.use((req,res,next) => {
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
   next();
 })
 
+app.use('/', users);
 app.use('/islands', islands);
 app.use('/islands/:id/reviews', reviews)
 
