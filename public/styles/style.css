@@ -3,6 +3,7 @@
 body {
   margin: 0;
   padding: 0;
+  height: 100vh;
 }
 
 .flex {
@@ -38,7 +39,50 @@ body {
   transform: none;
 }
 
+.landing-page {
+  background: url('../assets/green-island.jpg') no-repeat center;
+  background-size: cover;
+  width: 100%;
+  border: 3px solid red;
+  
+  height: 100vh;
+  overflow: visible;
+  /* width: 100vw; */
+  flex-direction: column;
+  /* justify-content: baseline; */
+  align-items: center;
+  row-gap: 18rem;
+}
 
+.landing-page h1 {
+  font-family: "Kaushan Script", cursive, sans-serif;
+  font-size: 3rem;
+}
+
+.island-button {
+  font-size: 4rem;
+  font-family: "Kaushan Script", cursive, sans-serif;
+  margin-right: 100px;
+  padding: 1rem 1rem 1rem 1rem;
+  border-radius: 1.875rem;  
+  background-color: transparent;
+  /* background: linear-gradient(to bottom, #6d2dfd, #22c1c3); */
+  border: none;
+  opacity: .7;
+  transition: opacity,color,transform 200ms ease-in-out;
+}
+
+.island-button a {
+  text-decoration: none;
+  color: white;
+}
+
+.island-button:hover {
+  cursor: pointer;
+  opacity: 1;
+  color: white;
+  transform: scale(1.1) translateX(-15px) translateY(-15px);
+}
 
 #navbar-brand {
   font-family: "Smooch", sans-serif;

@@ -65,6 +65,10 @@ app.use('/', users);
 app.use('/islands', islands);
 app.use('/islands/:id/reviews', reviews)
 
+app.get('/', (req, res) => {
+  res.render('home')
+})
+
 app.all('*', (req,res,next) => {
   next(new ExpError("Page not Found", 404))
 })
