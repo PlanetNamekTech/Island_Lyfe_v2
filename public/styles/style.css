@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Smooch&display=swap');
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.flex {
+  display: flex;
+}
+.container1 {
+  margin-bottom: 2rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar1 {
+  background: radial-gradient(#090979, #00d4ff);
+  margin-bottom: 1rem;
+}
+.nav-links-2 a, .nav-links-3 a{
+  text-decoration: none;
+  display: inline-block;
+  color: white;
+  padding: 1rem;
+  font-weight: 700;
+  transition: transform 200ms ease-in-out;
+}
+
+.nav-links-2 a:hover, .nav-links-3 a:hover {
+  transform: scale(1.1) translate(-5px, -5px);  /* need to include on one line or one transform property will overwrite the other
+  /* transform: translate(-5px, -5px); */
+}
+
+.nav-links-2 a:first-child:hover {
+  transform: none;
+}
+
+
+
+#navbar-brand {
+  font-family: "Smooch", sans-serif;
+  font-size: 2rem;
+  text-align: left;
+  font-weight: 700;
+  color: white;
+}
