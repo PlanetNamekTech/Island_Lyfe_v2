@@ -20,6 +20,7 @@ const seedDB = async() => {
     const rand2 = Math.floor(Math.random()*2);
     const hemis = ['Northern', 'Southern'];
     const island = new Island ({
+      author: '62859a652fbde3c4449a20f0', // Sam for setting up author (Authorization)
       location: `${islands[rand1000].city}, ${islands[rand1000].state}`,
       title: `${sample(descriptors)} ${sample(places)}`,
       image: 'https://source.unsplash.com/random/300x300/?beach',
