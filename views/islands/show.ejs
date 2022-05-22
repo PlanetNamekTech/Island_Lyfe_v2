@@ -1,8 +1,7 @@
 <% layout('./layouts/boilerplate') %> 
 <link rel="stylesheet" href="/styles/stars.css">
 
-
-  <div class="row">
+  <div class="row container">
     <div class="col-6">
       <div id="islandCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
@@ -40,10 +39,9 @@
           </form>
         </div>
         <% } %> 
-        <div class="card-footer text-muted">2 Days Ago</div>
+        <div class="card-footer text-muted">Last Updated : 2 Days Ago</div>
       </div>
     
-    </div>
 
   <div class="col-6">
     <% if(currentUser) { %> 
@@ -93,6 +91,8 @@
       </div>
     <% } %>
   </div>
+
+
 
   <footer>
     <a href="/islands">All Islands</a>

@@ -6,7 +6,6 @@ body {
   height: 100vh;
   /* overflow: hidden; This created scrolling problems on main page so taking it out for now */ 
   scrollbar-width: none;
-  overflow: hidden;
 }
 
 img {
@@ -24,8 +23,15 @@ img {
   align-items: center;
 }
 
-.container::-webkit-scrollbar { 
-  display: none;  /* Safari and Chrome */
+.container {
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+.container::-webkit-scrollbar { /* WebKit */
+  display: none;
+  width: 0;
+  height: 0;
 }
 
 .navbar1 {
