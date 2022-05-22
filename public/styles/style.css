@@ -4,7 +4,13 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
+  /* overflow: hidden; This created scrolling problems on main page so taking it out for now */ 
+  scrollbar-width: none;
   overflow: hidden;
+}
+
+img {
+  max-height: 50vh;
 }
 
 .flex {
@@ -16,6 +22,10 @@ body {
   margin-right: 2rem;
   justify-content: space-between;
   align-items: center;
+}
+
+.container::-webkit-scrollbar { 
+  display: none;  /* Safari and Chrome */
 }
 
 .navbar1 {

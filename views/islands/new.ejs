@@ -1,21 +1,9 @@
 <% layout('./layouts/boilerplate') %> 
-  <!-- <form action="/islands" method="POST">
-    <div>
-      <label for="title">Title</label>
-      <input type="text" id="title" name="island[title]">
-    </div>
-    <div>
-      <label for="location">Location</label>
-      <input type="text" id="location" name="island[location]">
-    </div>
-    <button>Add Island</button>
-  </form>
-  <a href="/islands">Back to all islands</a> -->
   
   <div class="row">
     <h1 class="text-center mt-3">Add Island</h1>
     <div class="col-6 offset-3">
-      <form action="/islands" method="POST" novalidate class="validated-form">
+      <form action="/islands" method="POST" novalidate class="validated-form" enctype="multipart/form-data">
         <div class="mb-3">
           <label for="title" class="form-label">Title</label>
           <input class="form-control" type="text" id="title" name="island[title]" required>
@@ -24,10 +12,7 @@
           <label for="location" class="form-label">Location</label>
           <input class="form-control" type="text" id="location" name="island[location]" required>
         </div>
-        <div class="mb-3">
-          <label for="image" class="form-label">Image URL</label>
-          <input class="form-control" type="text" id="image" name="island[image]" required>
-        </div>
+        
         <div class="mb-3">
           <label for="hemisphere" class="form-label">Hemisphere</label>
           <div class="input-group">
@@ -41,6 +26,10 @@
         <div class="mb-3">
           <label for="description" class="form-label">Description</label>
           <textarea class="form-control" type="text" id="description" name="island[description]" required></textarea>
+        </div>
+        <div class="mb-3">
+          <label for="image" class="form-label">Upload Image(s)</label>
+          <input class="form-control" type="file" id="image" name="image" multiple>
         </div>
         <div class="mb-3">
           <button class="btn btn-info">Add Island</button>

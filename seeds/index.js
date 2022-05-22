@@ -23,9 +23,18 @@ const seedDB = async() => {
       author: '62859a652fbde3c4449a20f0', // Sam for setting up author (Authorization)
       location: `${islands[rand1000].city}, ${islands[rand1000].state}`,
       title: `${sample(descriptors)} ${sample(places)}`,
-      image: 'https://source.unsplash.com/random/300x300/?beach',
       description: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Accusantium ab labore aliquam iste, dolorum culpa fugiat similique laborum repudiandae dolore?',
-      hemisphere: `${hemis[rand2]}`
+      hemisphere: `${hemis[rand2]}`,
+      images: [
+        {
+          url: 'https://res.cloudinary.com/siracha/image/upload/v1653169033/YelpCamp/ucwmhbo7yrhcxbvwtjgm.jpg',
+          filename: 'YelpCamp/ucwmhbo7yrhcxbvwtjgm'
+        },
+        {
+          url: 'https://res.cloudinary.com/siracha/image/upload/v1653169041/YelpCamp/abvgdovv68ekir2mzzto.jpg',
+          filename: 'YelpCamp/abvgdovv68ekir2mzzto'
+        }
+      ]
     })
     await island.save();
   }

@@ -1,3 +1,4 @@
+const { cloudinary } = require('../cloudinary');
 const Island = require('../models/island');
 
 module.exports.index = async(req, res) => {
@@ -11,6 +12,7 @@ module.exports.renderNewForm = (req, res) => {
 
 module.exports.createIsland = async(req,res) => {
   const island = new Island(req.body.island);
+  island.images = req.files.map(file => ({url: file.path, filename: file.filename}))
   island.author = req.user._id; // When a new island is added, it is associated with the current user
   await island.save();
   req.flash('success', 'Successfully added island!');
@@ -42,7 +44,18 @@ module.exports.renderEditForm = async(req,res) => {
 
 module.exports.updateIsland = async(req, res) => {
   const { id } = req.params;
+  console.log(req.body);
   const island = await Island.findByIdAndUpdate(id, {...req.body.island});
+  const imgs = req.files.map(file => ({url: file.path, filename: file.filename}))
+  island.images.push(...imgs);
+  await island.save();
+  if(req.body.deleteImages) {
+    for(let filename of req.body.deleteImages) {
+      await cloudinary.uploader.destroy(filename);
+    }
+    await campground.updateOne({$pull: {images: {filename: {$in: req.body.deleteImages}}}})
+    console.log(island);
+  }
   req.flash('success', 'Successfully updated island!');
   res.redirect(`/islands/${island._id}`);
 }
