@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/PlanetNamekTech/Island_Lyfe_v2#readme",
   "dependencies": {
+    "@mapbox/mapbox-sdk": "^0.13.3",
     "cloudinary": "^1.30.0",
     "connect-flash": "^0.1.1",
     "dotenv": "^16.0.1",

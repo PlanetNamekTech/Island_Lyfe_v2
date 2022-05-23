@@ -1,5 +1,8 @@
-const { cloudinary } = require('../cloudinary');
-const Island = require('../models/island');
+const { cloudinary } = require('../cloudinary'),
+      Island = require('../models/island'),
+      mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding'),
+      mapBoxToken = process.env.MAPBOX_TOKEN,
+      geocoder = mbxGeocoding({accessToken: mapBoxToken});
 
 module.exports.index = async(req, res) => {
   const islands = await Island.find({});
@@ -11,7 +14,12 @@ module.exports.renderNewForm = (req, res) => {
 }
 
 module.exports.createIsland = async(req,res) => {
+  const geoData = await geocoder.forwardGeocode({
+    query: req.body.island.location,
+    limit: 1
+  }).send()
   const island = new Island(req.body.island);
+  island.geometry = geoData.body.features[0].geometry;
   island.images = req.files.map(file => ({url: file.path, filename: file.filename}))
   island.author = req.user._id; // When a new island is added, it is associated with the current user
   await island.save();
