@@ -27,7 +27,10 @@ const seedDB = async() => {
       hemisphere: `${hemis[rand2]}`,
       geometry: {
         type: "Point",
-        coordinates: [-81.0481, -4.1031]
+        coordinates: [
+          islands[rand1000].longitude,
+          islands[rand1000].latitude
+        ]
       },
       images: [
         {

@@ -10,6 +10,9 @@ const ImageSchema = new Schema ({
 ImageSchema.virtual('thumbnail').get(function() {
   return this.url.replace('/upload', '/upload/w_250')
 })
+
+const opts = {toJSON: {virtuals: true}};
+
 const IslandSchema = new Schema({
   title: String,
   images: [ImageSchema],
@@ -37,7 +40,12 @@ const IslandSchema = new Schema({
       ref: "Review"
     }
   ]
-});
+}, opts);
+
+IslandSchema.virtual('properties.popUpMarkup').get(function() {
+  return `<strong><a href="/islands/${this._id}">${this.title}</a></strong>
+  <p>${this.description.substring(0, 30)}...</p>`
+})
 
 IslandSchema.post('findOneAndDelete', async function(info) {
   if(info){
