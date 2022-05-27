@@ -13,6 +13,8 @@ const LocalStrategy = require('passport-local');
 const ExpError = require('./Utils/ExpError');
 const mtdOverride = require('method-override');
 const User = require('./models/user');
+const mongoSanitize = require('express-mongo-sanitize');
+const port = 3000;
 
 
 const islands = require('./routes/islands');
@@ -35,13 +37,16 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(express.urlencoded({extended: true}))
 app.use(mtdOverride('_method'))
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(mongoSanitize());
 
 const sessionConfig = {
+  name: 'session', // custom cookie name for partial security reasons, anything better than default name
   secret: 'islandparadise',
   resave: false,
   saveUninitialized: true,
   cookie: {
-    httpOnly: true,
+    httpOnly: true, // Cookies not accessible by javascript, only http
+    // secure: true, Cookies can only be changed or configured over HTTPS when this is true
     expires: Date.now() + 1000*60*60*24*7, // A week from today, Date.now() initially in ms
     maxAge: 1000*60*60*24*7 // Takes precedence in most browsers
   }
@@ -83,6 +88,6 @@ app.use((e, req, res, next) => {
   res.status(statusCode).render('error', { e });
 })
 
-app.listen(3000, () =>{
-  console.log("Serving on port 3000")
+app.listen(port, () =>{
+  console.log(`Serving on port ${port}`)
 })

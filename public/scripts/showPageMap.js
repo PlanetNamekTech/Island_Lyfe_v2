@@ -7,6 +7,8 @@
     zoom: 6 // starting zoom
     });
 
+    map.addControl((new mapboxgl.NavigationControl()));
+
  new mapboxgl.Marker()
       .setLngLat(island.geometry.coordinates)
       .setPopup(

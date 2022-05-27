@@ -12,6 +12,11 @@ img {
   max-height: 50vh;
 }
 
+footer, footer > a {
+  margin-bottom: 5rem;
+  text-decoration: none;
+}
+
 .flex {
   display: flex;
 }
@@ -106,4 +111,54 @@ img {
   text-align: left;
   font-weight: 700;
   color: white;
+}
+
+ /* Hamburger Styles */
+.hamburger {
+  display: none;
+  padding-top: 1.875rem;
+  padding-bottom: 1.875rem;
+}
+
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  background-color: #101010;
+}
+
+@media only screen and (max-width: 43.5rem) {
+  .container1 {
+    position: fixed;
+    left: -200%;
+  }
+
+  .container1.active{
+    left: 0;
+  }
+
+  .landing-page{
+    text-align: center;
+  }
+
+  .hamburger {
+    display: block;
+    cursor: pointer;
+    margin-left: 85%;
+  }
+
+  .hamburger.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active .bar:nth-child(1) {
+      transform: translateY(8px) rotate(45deg);
+  }
+
+  .hamburger.active .bar:nth-child(3) {
+      transform: translateY(-8px) rotate(-45deg);
+  }
 }

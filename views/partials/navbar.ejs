@@ -3,19 +3,43 @@
   <div class="container1 flex">
     <div class="nav-links-2">
         <a href="#" id="navbar-brand">Island Lyfe</a>
-        <a href="/">Home</a>
-        <a href="/islands">Islands</a>
-        <a href="/islands/new">New Island</a>
+        <a href="/" class="navLink">Home</a>
+        <a href="/islands" class="navLink">Islands</a>
+        <a href="/islands/new" class="navLink">New Island</a>
     </div>
     <div class="nav-links-3">
       <!-- if !currentUser ejs to display one or the other -->
       <% if(!currentUser) { %>
-        <a href="/login">Login</a>
-        <a href="/register">Sign Up</a>
+        <a href="/login" class="navLink">Login</a>
+        <a href="/register" class="navLink">Sign Up</a>
     <% } else { %>
       <a href="/logout">Logout</a>
     <% } %> 
       
     </div>
   </div>
+  <div class="hamburger">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+   </div>
 </nav>
+
+<script>
+const hamburger = document.querySelector(".hamburger");
+const container1 = document.querySelector(".container1");
+const navLink = document.querySelector(".navLink")
+
+hamburger.addEventListener("click", mobileMenu);
+navLink.forEach(n => n.addEventListener("click", closeMenu));
+
+function closeMenu() {
+    hamburger.classList.remove("active");
+    navMenu.classList.remove("active");
+}
+
+function mobileMenu() {
+    hamburger.classList.toggle("active");
+    container1.classList.toggle("active");
+}
+</script>

@@ -4,7 +4,9 @@
   <div class="col-6 offset-3">
     <div class="alert alert-danger mt-3" role="alert">
       <h4 class="alert-heading"><%= e.message  %> </h4>
+      <% if(process.env.NODE_ENV !== "production") { %> <!-- Don't display error stack outside of development -->
       <p class="text-break"><%= e.stack  %> </p>
+      <% } %> 
     </div>
   </div>
 </div>
