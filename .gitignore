@@ -6,5 +6,3 @@ public/assets/.DS_Store
 public/assets/Smooch/0FL.txt
 public/assets/Smooch/Smooch-Regular.ttf
 .env
-cloudinary
-public/scripts/clusterMap.js
