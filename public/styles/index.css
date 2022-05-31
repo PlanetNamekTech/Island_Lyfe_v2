@@ -24,17 +24,20 @@
   color: white;
   /* background-image: url('https://res.cloudinary.com/siracha/image/upload/v1653169033/YelpCamp/ucwmhbo7yrhcxbvwtjgm.jpg'); */
   background-size: cover;
-  padding-top: 12rem;
+  padding-top: 10rem;
   border-radius: 2%;
+  overflow: hidden;
   max-width: 45ch;
-  min-width: 25ch;
-  margin-bottom: 2rem;
+  min-width: 45ch;
+  /* max-height: 40vh; */
+  margin-bottom: 1rem;
 }
 
 .card-content {
   background: linear-gradient(hsl(0 0% 0% / .3), hsl(0 0% 0% / 1));
   padding-left: 1rem;
   padding-right: 1rem;
+  /* min-height: 15vh; */
 }
 
 .card-title {
@@ -51,4 +54,19 @@
   bottom: 0;
   width: 100%;
   background: rgb(209, 223, 250);
+}
+
+.cardbody {
+  min-height: 7ch;
+}
+
+.button {
+  cursor: pointer;
+  display: inline-block;
+  text-decoration: none;
+  color: hsl(207, 19%, 9%);
+  background-color: #00d4ff;
+  padding: .2rem .8rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
 }

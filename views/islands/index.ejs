@@ -13,8 +13,8 @@
               <% } %> 
           <div class="card-content">
             <h2 class="card-title"><%=island.title%></h2>
-            <p class="cardbody">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat iure suscipit officia totam!</p>
-            <a href="/islands/<%= island._id %>" class="button"><%= island.title %></a>
+            <p class="cardbody"><%=island.description%></p>
+            <a href="/islands/<%= island._id %>" class="button">View <%= island.title %></a>
            
           </div>
         </div>
