@@ -52,16 +52,21 @@ module.exports.renderEditForm = async(req,res) => {
 
 module.exports.updateIsland = async(req, res) => {
   const { id } = req.params;
+  const geoData = await geocoder.forwardGeocode({
+    query: req.body.island.location,
+    limit: 1
+  }).send()
   console.log(req.body);
   const island = await Island.findByIdAndUpdate(id, {...req.body.island});
   const imgs = req.files.map(file => ({url: file.path, filename: file.filename}))
+  island.geometry = geoData.body.features[0].geometry;
   island.images.push(...imgs);
   await island.save();
   if(req.body.deleteImages) {
     for(let filename of req.body.deleteImages) {
       await cloudinary.uploader.destroy(filename);
     }
-    await campground.updateOne({$pull: {images: {filename: {$in: req.body.deleteImages}}}})
+    await island.updateOne({$pull: {images: {filename: {$in: req.body.deleteImages}}}})
     console.log(island);
   }
   req.flash('success', 'Successfully updated island!');

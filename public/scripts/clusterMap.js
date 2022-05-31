@@ -3,7 +3,7 @@ const map = new mapboxgl.Map({
 container: 'map',
 style: 'mapbox://styles/mapbox/dark-v10',
 center: [-103.5917, 40.6699],
-zoom: 3
+zoom: 1.5
 });
 
 map.addControl((new mapboxgl.NavigationControl()));
