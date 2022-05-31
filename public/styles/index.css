@@ -1,0 +1,54 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+.index-title {
+  text-align: center;
+  font-family: "Kaushan Script", cursive, sans-serif;
+  font-size: 3rem;
+  padding-top: 1rem;
+}
+
+.flexbox-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  /* flex-direction: column; */
+}
+
+.card {
+  display: inline-block;
+  color: white;
+  /* background-image: url('https://res.cloudinary.com/siracha/image/upload/v1653169033/YelpCamp/ucwmhbo7yrhcxbvwtjgm.jpg'); */
+  background-size: cover;
+  padding-top: 12rem;
+  border-radius: 2%;
+  max-width: 45ch;
+  min-width: 25ch;
+  margin-bottom: 2rem;
+}
+
+.card-content {
+  background: linear-gradient(hsl(0 0% 0% / .3), hsl(0 0% 0% / 1));
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.card-title {
+  position: relative;
+  width: max-content;
+  max-width: 100%;
+}
+
+.card-title::after {
+  content: "";
+  position: absolute;
+  height: 3px;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: rgb(209, 223, 250);
+}

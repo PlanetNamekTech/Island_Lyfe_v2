@@ -1,11 +1,26 @@
 <% layout('./layouts/boilerplate') %> 
-<div id="map" style="width: 100%; height: 500px; margin-top: 3rem;"></div>
-  <h1>All Islands</h1>
-    <ul>
+<link rel="stylesheet" href="./styles/index.css">
+<div id="map" style="width: 100%; height: 45vh; margin-top: 3rem;"></div>
+<h1 class="index-title">All Islands</h1>
+<div class="flexbox-container">
+  
+    <!-- <ul> -->
       <% for (let island of islands) { %> 
-        <li><a href="/islands/<%= island._id %>"><%= island.title %></a> </li>
+        <% if(island.images.length) { %> 
+        <div class="card" style="background-image: url('<%=island.images[0].url%>');">
+          <% } else { %> 
+            <div class="card" style="background-image: url('https://res.cloudinary.com/siracha/image/upload/v1653169033/YelpCamp/ucwmhbo7yrhcxbvwtjgm.jpg');">
+              <% } %> 
+          <div class="card-content">
+            <h2 class="card-title"><%=island.title%></h2>
+            <p class="cardbody">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Fugiat iure suscipit officia totam!</p>
+            <a href="/islands/<%= island._id %>" class="button"><%= island.title %></a>
+           
+          </div>
+        </div>
         <% } %> 
-    </ul>
+</div>
+    <!-- </ul> -->
 
     <a href="/islands/new">Add New Island</a>
 </body>
