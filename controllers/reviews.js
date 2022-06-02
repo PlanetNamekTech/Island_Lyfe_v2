@@ -8,7 +8,7 @@ module.exports.createReview = async(req,res) => {
   island.reviews.push(review);
   await review.save();
   await island.save();
-  req.flash('success', 'Review successfully updated');
+  req.flash('success', 'Review successfully added');
   res.redirect(`/islands/${island._id}`);
 }
 

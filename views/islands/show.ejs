@@ -1,13 +1,14 @@
 <% layout('./layouts/boilerplate') %> 
 <link rel="stylesheet" href="/styles/stars.css">
+<link rel="stylesheet" href="/styles/show.css">
 
 <script>
   const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
   const island = <%- JSON.stringify(island) %>
 </script>
-  <div class="row container">
-    <div class="col-6">
-      <div id='map' style='width: 400px; height: 300px;'></div>
+  <div class="grid">
+    <div class="island-profile">
+      <div id='map'></div>
       <div id="islandCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
           <% island.images.forEach((img, i) => { %>
@@ -48,7 +49,7 @@
       </div>
     
 
-  <div class="col-6">
+  <div class="island-review">
     <% if(currentUser) { %> 
     <h2>Leave a Review</h2>
     <form action="/islands/<%= island._id %>/reviews" method="POST" class="mb-3 validated-form" novalidate>
@@ -79,24 +80,25 @@
       <button class="btn btn-success">Submit Review</button>
     </form>
     <% } %> 
-    <%  for (let review of island.reviews) { %>  
-      <div class="mb-3 card">   
-        <div class="card-body">
-          <h5 class="card-title"><%= review.author.username %> </h5>
-          <p class="starability-result" data-rating="<%= review.rating  %>">
-            Rated: <%=review.rating%>  stars
-          </p>
-          <p class="card-text">Review: <%= review.body %> </p>
-          <% if(currentUser && review.author.equals(currentUser._id)) { %> 
-          <form action="/islands/<%= island._id %>/reviews/<%= review._id%>?_method=DELETE" method="POST">
-          <button class="btn btn-sm btn-danger">Delete Review</button>
-          </form>
-          <% } %> 
-        </div>
-      </div>
-    <% } %>
+    <!-- Below div end of 1st grid item -->
   </div>
-
+  </div> 
+  <%  for (let review of island.reviews) { %>  
+    <div class="review-display mb-3 card">   
+      <div class="card-body">
+        <h5 class="card-title"><%= review.author.username %> </h5>
+        <p class="starability-result" data-rating="<%= review.rating  %>">
+          Rated: <%=review.rating%>  stars
+        </p>
+        <p class="card-text">Review: <%= review.body %> </p>
+        <% if(currentUser && review.author.equals(currentUser._id)) { %> 
+        <form action="/islands/<%= island._id %>/reviews/<%= review._id%>?_method=DELETE" method="POST">
+        <button class="btn btn-sm btn-danger">Delete Review</button>
+        </form>
+        <% } %> 
+      </div>
+    </div>
+  <% } %>
 
 
   <footer>
