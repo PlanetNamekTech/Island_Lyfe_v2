@@ -6,7 +6,6 @@
   const mapToken = '<%-process.env.MAPBOX_TOKEN%>';
   const island = <%- JSON.stringify(island) %>
 </script>
-  <div class="grid">
     <div class="island-profile">
       <div id='map'></div>
       <div id="islandCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -17,7 +16,7 @@
           </div>
           <% }) %> 
         </div>
-        <% if(island.images.length > 1) { %>
+        <% if(island.images.length > 1) { %> 
           <button class="carousel-control-prev" type="button" data-bs-target="#islandCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
@@ -52,7 +51,7 @@
   <div class="island-review">
     <% if(currentUser) { %> 
     <h2>Leave a Review</h2>
-    <form action="/islands/<%= island._id %>/reviews" method="POST" class="mb-3 validated-form" novalidate>
+    <form action="/islands/<%= island._id %>/reviews" method="POST" class="mb-3 validated-form text-center" novalidate>
       <div class="mb-3">
 
         <fieldset class="starability-checkmark">
@@ -83,6 +82,10 @@
     <!-- Below div end of 1st grid item -->
   </div>
   </div> 
+  <h2 class="text-center mtop">Reviews</h2>
+  <% if (!island.reviews.length){ %>
+    <h3 class="text-center">*No Reviews Yet* - <span>Be the first!</span></h3>
+  <% } %>
   <%  for (let review of island.reviews) { %>  
     <div class="review-display mb-3 card">   
       <div class="card-body">

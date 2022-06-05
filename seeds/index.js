@@ -15,7 +15,7 @@ const sample = (array) => array[Math.floor(Math.random()*array.length)];
 
 const seedDB = async() => {
   await Island.deleteMany({});
-  for(let i = 0; i < 50; i++){
+  for(let i = 0; i < 25; i++){
     const rand1000 = Math.floor(Math.random()*1000);
     const rand2 = Math.floor(Math.random()*2);
     const hemis = ['Northern', 'Southern'];
@@ -34,12 +34,12 @@ const seedDB = async() => {
       },
       images: [
         {
-          url: 'https://res.cloudinary.com/siracha/image/upload/v1653169033/YelpCamp/ucwmhbo7yrhcxbvwtjgm.jpg',
-          filename: 'YelpCamp/ucwmhbo7yrhcxbvwtjgm'
+          url: 'https://res.cloudinary.com/siracha/image/upload/v1654036170/IslandLyfe/rnslg9z7ettwdqlkfmbn.jpg',
+          filename: 'IslandLyfe/rnslg9z7ettwdqlkfmbn.jpg'
         },
         {
-          url: 'https://res.cloudinary.com/siracha/image/upload/v1653169041/YelpCamp/abvgdovv68ekir2mzzto.jpg',
-          filename: 'YelpCamp/abvgdovv68ekir2mzzto'
+          url: 'https://res.cloudinary.com/siracha/image/upload/v1654036945/IslandLyfe/jratgrhhgxfpu6nvdezb.jpg',
+          filename: 'IslandLyfe/jratgrhhgxfpu6nvdezb'
         }
       ]
     })

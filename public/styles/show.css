@@ -1,17 +1,18 @@
 footer {
   text-align: center;
-  margin-bottom: 3rem;
-  grid-column: 1/4;
+  padding-bottom: 5rem;
 }
 
-footer > a {
+footer  a {
   font-size: 1.5rem;
-  
 }
-.grid {
-  display: grid;
-  grid-template-columns: auto-fill, 1fr 1fr;
-  gap: 1rem;
+
+h3 span {
+  font-style: italic;
+}
+
+.mtop {
+  margin-top: 2rem;
 }
 
 .island-profile {
@@ -21,21 +22,40 @@ footer > a {
 }
 
 .island-review {
+
+  margin-left: 5rem;
   display: inline-block;
   padding: 2rem;
+  vertical-align: top;
+  
 }
 
 .review-display {
-  align-self: start;
+  /* align-self: start; */
   margin-right: 2rem;
   border: 2px solid black;
 }
 #map {
-  max-width: 50vw; height: 300px;
+  max-width: 50vw; 
+  height: 300px;
   margin-bottom: 1rem;
 }
 
-@media (max-width: 31.25rem) {
+@media (max-width: 54.5rem) {
+  .island-profile {
+    max-width: 100%;
+    padding: 1rem;
+  }
+  .island-review {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+    padding: 1rem;
+    margin: auto;
+  }
+  .starability-checkmark {
+    display: inline;
+  }
   #map {
     max-width: 100%;
     margin-bottom: 1rem;
