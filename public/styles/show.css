@@ -16,9 +16,10 @@ h3 span {
 }
 
 .island-profile {
-  max-width: 50vw;
-  display: inline-block;
+  max-width: 40vw;
+  /* display: inline-block; */
   padding-left: 2rem;
+  margin: 0 auto;
 }
 
 .island-review {
@@ -31,8 +32,8 @@ h3 span {
 }
 
 .review-display {
-  /* align-self: start; */
-  margin-right: 2rem;
+  /* margin: 2rem 5rem; */
+  margin: 2rem 10rem;
   border: 2px solid black;
 }
 #map {
@@ -48,13 +49,25 @@ h3 span {
   }
   .island-review {
     display: block;
-    margin: 0 auto;
+    /* margin: 0 auto; */
     text-align: center;
     padding: 1rem;
     margin: auto;
   }
+  .review-display {
+    max-width: 100%;
+    margin: 2rem 3rem;
+  }
+  .card {
+    
+  }
   .starability-checkmark {
     display: inline;
+    margin: 0;
+  }
+  .card-body {
+    text-align: center;
+    align-self: center;
   }
   #map {
     max-width: 100%;

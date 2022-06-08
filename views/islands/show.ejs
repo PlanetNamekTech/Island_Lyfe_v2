@@ -87,7 +87,7 @@
     <h3 class="text-center">*No Reviews Yet* - <span>Be the first!</span></h3>
   <% } %>
   <%  for (let review of island.reviews) { %>  
-    <div class="review-display mb-3 card">   
+    <div class="review-display card text-center">   
       <div class="card-body">
         <h5 class="card-title"><%= review.author.username %> </h5>
         <p class="starability-result" data-rating="<%= review.rating  %>">
