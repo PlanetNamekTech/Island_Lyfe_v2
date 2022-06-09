@@ -8,9 +8,9 @@ body {
   scrollbar-width: none;
 }
 
-img {
+/* img {
   max-height: 50vh;
-}
+} */
 
 footer, footer > a {
   margin-bottom: 5rem;

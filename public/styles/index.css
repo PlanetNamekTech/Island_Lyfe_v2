@@ -70,3 +70,12 @@
   margin-bottom: 1rem;
   font-weight: 700;
 }
+
+@media (max-width: 54.5rem) {
+  .card-content {
+    text-align: center;
+  }
+  .card-title {
+    margin: 0 auto;
+  }
+}
