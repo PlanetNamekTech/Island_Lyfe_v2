@@ -72,10 +72,19 @@
 }
 
 @media (max-width: 54.5rem) {
+  * {
+    overflow-x: hidden;
+  }
+  .card {
+    padding: 8rem 0 0 0;
+  }
   .card-content {
     text-align: center;
   }
   .card-title {
     margin: 0 auto;
+  }
+  .cardbody {
+    padding: 0 2rem;
   }
 }

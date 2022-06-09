@@ -134,6 +134,10 @@ footer, footer > a {
   .container1 {
     position: fixed;
     left: -200%;
+    margin-right: 0;
+  }
+  .navbar1 {
+    width: 100%;
   }
 
   .container1.active{
