@@ -2,6 +2,7 @@ if(process.env.NODE_ENV !== "production") {
   require('dotenv').config()
 }
 
+
 const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
@@ -14,14 +15,18 @@ const ExpError = require('./Utils/ExpError');
 const mtdOverride = require('method-override');
 const User = require('./models/user');
 const mongoSanitize = require('express-mongo-sanitize');
+const MongoStore = require('connect-mongo');
 const port = 3000;
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/island-lyfe'
+// const dbUrl = process.env.DB_URL
 
 
 const islands = require('./routes/islands');
 const reviews = require('./routes/reviews');
 const users = require('./routes/users');
 
-mongoose.connect('mongodb://localhost:27017/island-lyfe')
+// mongodb://localhost:27017/island-lyfe
+mongoose.connect(dbUrl)
 
 const database = mongoose.connection;
 database.on('error', console.error.bind(console, "connection error"));
@@ -39,9 +44,24 @@ app.use(mtdOverride('_method'))
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(mongoSanitize());
 
+const secret = process.env.SECRET || 'islandparadise'
+
+const store = MongoStore.create({
+  mongoUrl: dbUrl,
+  crypto: {
+    secret: secret
+  },
+  touchAfter: 24 * 3600
+});
+
+store.on("error", function(e){
+  console.log("Session Store Error", e)
+})
+
 const sessionConfig = {
+  store,
   name: 'session', // custom cookie name for partial security reasons, anything better than default name
-  secret: 'islandparadise',
+  secret,
   resave: false,
   saveUninitialized: true,
   cookie: {

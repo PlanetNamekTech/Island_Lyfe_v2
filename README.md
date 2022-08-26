@@ -2,6 +2,8 @@
  A review site for entire islands!
  Might be expanded for beaches in the future.
 
+ * Cluster Map is not accurate, seed data was used for some "islands" to populate.
+
  ## Map Settings :
  ```
 container: 'map',
