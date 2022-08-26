@@ -37,7 +37,7 @@
   background: linear-gradient(hsl(0 0% 0% / .3), hsl(0 0% 0% / 1));
   padding-left: 1rem;
   padding-right: 1rem;
-  min-height: 50%;
+  min-height: 100%;
 }
 
 .card-title {
