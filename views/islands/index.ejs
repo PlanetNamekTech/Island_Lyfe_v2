@@ -7,7 +7,7 @@
     <!-- <ul> -->
       <% for (let island of islands) { %> 
         <% if(island.images.length) { %> 
-        <div class="card" style="background-image: url('<%=island.images[0].url%>'); background-size: contain;">
+        <div class="card" style="background-image: url('<%=island.images[0].url%>');">
           <% } else { %> 
             <div class="card" style="background-image: url('https://res.cloudinary.com/siracha/image/upload/v1653169033/YelpCamp/ucwmhbo7yrhcxbvwtjgm.jpg');">
               <% } %> 
