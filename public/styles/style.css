@@ -17,6 +17,17 @@ footer, footer > a {
   text-decoration: none;
 }
 
+.footer {
+  text-align: center;
+  margin-bottom: 5em;
+}
+
+
+.footer-link {
+  font-size: 2rem;
+  text-decoration: none;
+}
+
 .flex {
   display: flex;
 }
