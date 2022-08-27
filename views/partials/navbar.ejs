@@ -1,8 +1,8 @@
 <head><link rel="stylesheet" href="/styles/style.css"></head>
 <nav class="navbar1">
   <div class="container1 flex">
+    <a href="/islands" id="navbar-brand">Island Lyfe</a>
     <div class="nav-links-2">
-        <a href="#" id="navbar-brand">Island Lyfe</a>
         <a href="/" class="navLink">Home</a>
         <a href="/islands" class="navLink">Islands</a>
         <a href="/islands/new" class="navLink">New Island</a>
@@ -28,7 +28,8 @@
 <script>
 const hamburger = document.querySelector(".hamburger");
 const container1 = document.querySelector(".container1");
-const navLink = document.querySelector(".navLink")
+const navLink = document.querySelector(".navLink");
+const navbarBrand = document.querySelector("#navbar-brand");
 
 hamburger.addEventListener("click", mobileMenu);
 navLink.forEach(n => n.addEventListener("click", closeMenu));
@@ -41,5 +42,6 @@ function closeMenu() {
 function mobileMenu() {
     hamburger.classList.toggle("active");
     container1.classList.toggle("active");
+    navbarBrand.classList.toggle("active");
 }
 </script>

@@ -86,6 +86,7 @@
   <h2 class="text-center mtop">Reviews</h2>
   <% if (!island.reviews.length){ %>
     <h3 class="text-center">*No Reviews Yet* - <span>Be the first!</span></h3>
+    <p class="text-center"><em>Must be logged in to leave a review</em></p>
   <% } %>
   <%  for (let review of island.reviews) { %>  
     <div class="review-display card text-center">   

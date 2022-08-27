@@ -32,7 +32,6 @@ footer, footer > a {
   display: flex;
 }
 .container1 {
-  margin-bottom: 2rem;
   margin-left: 2rem;
   margin-right: 2rem;
   justify-content: space-between;
@@ -80,9 +79,9 @@ footer, footer > a {
   overflow: visible;
   /* width: 100vw; */
   flex-direction: column;
-  /* justify-content: baseline; */
+  justify-content: flex-start;
   align-items: center;
-  row-gap: 18rem;
+  row-gap: 6rem;
 }
 
 .landing-page h1 {
@@ -99,13 +98,13 @@ footer, footer > a {
   background-color: transparent;
   /* background: linear-gradient(to bottom, #6d2dfd, #22c1c3); */
   border: none;
-  opacity: .7;
+  opacity: .8;
   transition: opacity,color,transform 200ms ease-in-out;
 }
 
 .island-button a {
   text-decoration: none;
-  color: white;
+  color: rgb(255, 255, 255);
 }
 
 .island-button:hover {
@@ -121,6 +120,9 @@ footer, footer > a {
   text-align: left;
   font-weight: 700;
   color: white;
+}
+#navbar-brand:hover {
+  color: black;
 }
 
  /* Hamburger Styles */
@@ -145,13 +147,28 @@ footer, footer > a {
     position: fixed;
     left: -200%;
     margin-right: 0;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
   }
   .navbar1 {
     width: 100%;
   }
+  .navLink {
+    padding: 0;
+  }
+  .nav-links-2 a, .nav-links-3 a{
+    padding: .5rem 1.2rem .2rem 1.2rem;
+  }
 
   .container1.active{
-    left: 0;
+    left: -1%;
+  }
+  #navbar-brand {
+    align-items: center;
+  }
+  #navbar-brand.active {
+    display: none;
   }
 
   .landing-page{
